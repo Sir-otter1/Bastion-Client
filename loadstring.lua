@@ -140,7 +140,51 @@ local function CreateLoadingScreen()
     FillCorner.CornerRadius = UDim.new(0, 3)
     FillCorner.Parent = ProgressFill
 
-    -- Animate progress bar
+    -- Store reference to last checkmark for success animation
+    local lastCheckMark
+
+    for i, fileName in ipairs(loadingFiles) do
+        local fileItem = Instance.new("Frame")
+        fileItem.Name = "FileItem_" .. i
+        fileItem.Size = UDim2.new(1, 0, 0, 20)
+        fileItem.BackgroundTransparency = 1
+        fileItem.LayoutOrder = i
+        fileItem.Parent = FileListFrame
+
+        local checkMark = Instance.new("TextLabel")
+        checkMark.Size = UDim2.new(0, 20, 1, 0)
+        checkMark.BackgroundTransparency = 1
+        checkMark.Text = "⏳"
+        checkMark.TextColor3 = Color3.fromRGB(120, 120, 140)
+        checkMark.TextSize = 12
+        checkMark.Font = Enum.Font.Gotham
+        checkMark.Parent = fileItem
+
+        local fileText = Instance.new("TextLabel")
+        fileText.Size = UDim2.new(1, -25, 1, 0)
+        fileText.Position = UDim2.new(0, 22, 0, 0)
+        fileText.BackgroundTransparency = 1
+        fileText.Text = fileName
+        fileText.TextColor3 = Color3.fromRGB(180, 180, 195)
+        fileText.TextSize = 11
+        fileText.Font = Enum.Font.Gotham
+        fileText.TextXAlignment = Enum.TextXAlignment.Left
+        fileText.Parent = fileItem
+
+        -- Animate loading
+        task.spawn(function()
+            wait((i - 1) * 0.1)
+            Tween(checkMark, {TextColor3 = Color3.fromRGB(100, 150, 255)}, 0.3)
+            wait(0.1)
+            checkMark.Text = "✓"
+        end)
+
+        if i == #loadingFiles then
+            lastCheckMark = checkMark
+        end
+    end
+
+    -- Progress bar animation
     task.spawn(function()
         for i = 0, 100, 2 do
             ProgressFill.Size = UDim2.new(i/100, 0, 1, 0)
@@ -148,6 +192,12 @@ local function CreateLoadingScreen()
             wait(0.02)
         end
         StatusLabel.Text = "Bastion Client loaded successfully!"
+
+        -- Animate success checkmark
+        if lastCheckMark then
+            Tween(lastCheckMark, {TextColor3 = Color3.fromRGB(50, 205, 100)}, 0.3)
+        end
+
         wait(0.5)
         LoadFrame:TweenSize(UDim2.new(0, 350, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.3, false, function()
             LoadingGui:Destroy()
