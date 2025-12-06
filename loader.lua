@@ -32,49 +32,20 @@ end
 -- Main loader function
 local function LoadBastionClient()
     print("Loading Bastion Client...")
-    
-    -- Base URL for raw files
-    local baseUrl = "https://raw.githubusercontent.com/Sir-otter1/Bastion-Client/main/src/"
-    
-    -- List of required files
-    local requiredFiles = {
-        {name = "Config", file = "Config.lua"},
-        {name = "GUI", file = "GUI/init.lua"},
-        {name = "Visuals", file = "Modules/Visuals.lua"},
-        {name = "Mobility", file = "Modules/Mobility.lua"},
-        {name = "Utility", file = "Modules/Utility.lua"},
-        {name = "Combat", file = "Modules/Combat.lua"},
-        {name = "RaycastHandler", file = "Modules/RaycastHandler.lua"},
-        {name = "Main", file = "main.lua"}
-    }
-    
-    -- Download and load all modules
-    local loadedModules = 0
-    
-    for _, moduleInfo in pairs(requiredFiles) do
-        local url = baseUrl .. moduleInfo.file
-        local content = DownloadFile(url)
-        
-        if content then
-            if LoadModule(moduleInfo.name, content) then
-                loadedModules = loadedModules + 1
-            end
-        end
-        
-        wait(0.1) -- Small delay to avoid rate limiting
-    end
-    
-    -- Initialize the main client
-    if _G.Main then
-        print("Initializing Bastion Client...")
-        _G.Main.Initialize()
-        print("Bastion Client loaded successfully!")
-        print("Press INSERT to toggle GUI")
+
+    -- For the loader, just download and execute the complete loadstring file
+    -- which contains all modules embedded
+    local loadstringUrl = "https://raw.githubusercontent.com/Sir-otter1/Bastion-Client/main/loadstring.lua"
+    local success, result = pcall(function()
+        loadstring(game:HttpGet(loadstringUrl))()
+    end)
+
+    if success then
+        print("Bastion Client loaded successfully via loader!")
     else
-        warn("Failed to load main module")
+        warn("Failed to load Bastion Client: " .. tostring(result))
+        LoadLocalFiles()
     end
-    
-    print(string.format("Loaded %d/%d modules", loadedModules, #requiredFiles))
 end
 
 -- Fallback: Load from local files if download fails
