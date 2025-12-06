@@ -48,4 +48,39 @@ A powerful Roblox Bedwars client with advanced features and anti-cheat compatibi
 Copy and paste this into Roblox:
 
 ```lua
-loadstring(game:HttpGet("[https://raw.githubusercontent.com/yourusername/Bastion-Client/main/loadstring.lua"))(](https://raw.githubusercontent.com/yourusername/Bastion-Client/main/loadstring.lua"))())
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sir-otter1/Bastion-Client/main/loadstring.lua"))()
+```
+
+### Method 2: Manual Installation
+1. Download all files from the `src/` directory
+2. Open Roblox and inject the `loader.lua` script
+3. The client will automatically download and load all required modules
+
+## Usage
+
+1. Execute the loadstring in Roblox
+2. Press `INSERT` to toggle the GUI
+3. Configure settings in each tab
+4. Enjoy enhanced gameplay!
+
+## Controls
+
+- `INSERT`: Toggle GUI
+- Left-click on toggles and sliders to adjust settings
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+
+This project is for educational purposes only. Use at your own risk.
+
+## Changelog
+
+### v1.0.0
+- Initial release
+- Basic ESP, Speed, and KillAura features
+- GUI interface
+
+<!-- Future updates will be documented here -->

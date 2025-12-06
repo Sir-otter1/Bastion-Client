@@ -33,8 +33,8 @@ end
 local function LoadBastionClient()
     print("Loading Bastion Client...")
     
-    -- Base URL for raw files (you'll need to update this with your actual repo)
-    local baseUrl = "https://raw.githubusercontent.com/yourusername/Bastion-Client/main/src/"
+    -- Base URL for raw files
+    local baseUrl = "https://raw.githubusercontent.com/Sir-otter1/Bastion-Client/main/src/"
     
     -- List of required files
     local requiredFiles = {

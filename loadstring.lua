@@ -350,13 +350,13 @@ function BastionGUI.CreateSection(parent, title)
     Section.Name = title .. "Section"
     Section.Parent = parent
     Section.Size = UDim2.new(1, -10, 0, 30)
-    Section.Position = UDim2.new(0, 5, 0, #parent:Get:GetChildren() * 35)
+    Section.Position = UDim2.new(0, 5, 0, #parent:GetChildren() * 35)
     Section.BackgroundColor3 = Colors.Secondary
     Section.BorderSizePixel = 0
     
     local SectionCorner = Instance.new("UICorner")
     SectionCorner.CornerRadius = UDim.new(0, 4)
-    SectionCorner.Parent =trice
+    SectionCorner.Parent = Section
     
     local SectionLabel = Instance.new("TextLabel")
     SectionLabel.Name = "SectionLabel"
