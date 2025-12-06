@@ -1,4 +1,4 @@
--- Bastion Client - Complete Self-Contained Loadstring
+4-- Bastion Client - Complete Self-Contained Loadstring
 -- Fully functional with all modules embedded
 
 local Players = game:GetService("Players")
@@ -602,7 +602,7 @@ end
 
 function BastionGUI.SetupInputs()
     UserInputService.InputBegan:Connect(function(input, gameProcessed)
-        if not gameProcessed and input.KeyCode == Enum.KeyCode.Insert then
+        if not gameProcessed and input.KeyCode == Enum.KeyCode.RightShift then
             ScreenGui.Enabled = not ScreenGui.Enabled
         end
     end)
@@ -1046,5 +1046,5 @@ end)
 BastionGUI.Initialize()
 
 print("Bastion Client loaded successfully!")
-print("Press INSERT to toggle GUI")
+print("Press RightShift to toggle GUI")
 print("Features: ESP, Speed, Flight, KillAura, Aimbot")
